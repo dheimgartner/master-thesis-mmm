@@ -18,9 +18,9 @@ The central file which implements the iterations of the Monte Carlo study is cal
 7. **observed_data_and_ground_truth.R** extracts real factor contributions (ROI-curves)
 8. **real_data_exploration_calibration.R** explores the real data set and computes calibration metrics, defines flighting patterns, media budget, etc. for simulation specification (not to be run)
 9. **modeling_and_decomposition.R** fits all the models and decomposes them in order to trace out factor contributions (according to WFD, ALE and SHAP)
-10. **curve_fitting.R** fits a logistic function to the contribution scatter, stores the xy coordinates for the curves and the ROI-curve parameters
+10. **curve_fitting.R** fits a logistic function to the contribution scatter, stores the xy coordinates for the curve plots and the ROI-curve parameters
 11. **results.R** produces the final results by aggregating all 500 iterations
-12. **curve_plots.R** produces individual curve plots for each model, decomposition and media channel which can be combined by f.ex. `ggarrange`
+12. **curve_plots.R** produces individual curve plots for each model, decomposition and media channel which can be combined (f.ex. with help of `ggarrange`)
 13. **own_functions.R** most important functions
 
 
