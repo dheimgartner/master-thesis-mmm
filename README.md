@@ -11,40 +11,28 @@ The central file which implements the iterations of the Monte Carlo study is cal
 
 - **master_simulation_loop.R:** 
 main file, runs all the other script important for the Monte Carlo study
-
 - **simulation_1.R:** 
 AMSS simulation specification *window 1*
-
 - **media_params.R:** 
 AMSS media channels specification, sourced by script above
-
 - **simulation_1_extreme.R:** 
 AMSS simulation specification for robustness checks *window 1*
-
 - **simulation_2.R:** 
 AMSS simulation specification *window 2*
-
 - **simulation_2_extreme.R:** 
 AMSS simulation specification for robustness checks *window 2*
-
 - **observed_data_and_ground_truth.R:** 
 extracts real factor contributions (ROI-curves)
-
 - **real_data_exploration_calibration.R:** 
 explores the real data set and computes calibration metrics, defines flighting patterns, media budget, etc. for simulation specification (not to be run)
-
 - **modeling_and_decomposition.R:** 
 fits all the models and decomposes them in order to trace out factor contributions (according to WFD, ALE and SHAP)
-
 - **curve_fitting.R:** 
 fits a logistic function to the contribution scatter, stores the xy coordinates for the curve plots and the ROI-curve parameters
-
 - **results.R:** 
 produces the final results by aggregating all 500 iterations
-
 - **curve_plots.R:** 
 produces individual curve plots for each model, decomposition and media channel which can be combined (f.ex. with help of `ggarrange`)
-
 - **own_functions.R:** 
 most important functions
 
