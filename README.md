@@ -3,6 +3,8 @@
 
 A Monte Carlo Simulation Study
 
+![](Figures/emblem.png)
+
 # workflow
 The central file which implements the iterations of the Monte Carlo study is **master_simulation_loop.R**. It is recommended to open this script and go through the residual scripts in chronological order. All the scripts start with a description and mention the required inputs.
 
