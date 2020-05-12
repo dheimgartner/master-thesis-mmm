@@ -1,7 +1,6 @@
 # master-thesis-mmm
-**Sales Modeling and Local Factor Decomposition for Optimal Investment Decisions in MMM**
-
 <img src="Figures/emblem.png" width=200 align="right">
+**Sales Modeling and Local Factor Decomposition for Optimal Investment Decisions in MMM**
 
 A Monte Carlo Simulation Study
 
