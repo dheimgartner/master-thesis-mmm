@@ -23,6 +23,7 @@
 # Output:
 # - contributions = Data frame with dimensions nrow = nrow(data) and ncol = length(mediatypes)
 # --------------------------------------------------------
+
 shap_decomposition <- function(model, mediatypes, data, target, pfun) {
   
   # Initial requirements --
