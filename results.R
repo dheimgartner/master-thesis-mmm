@@ -406,7 +406,9 @@ plot1 <-
   scale_fill_viridis_d() +
   labs(x = "modeling approach", y = "parameter values", title = "Media 1") +
   theme_bw() +
-  theme(legend.position = "bottom") +
+  theme(legend.position = "bottom",
+        axis.ticks.x = element_blank(),
+        axis.text.x = element_blank()) +
   scale_y_continuous(labels = scales::scientific)
 
 plot2 <-
@@ -422,7 +424,9 @@ plot2 <-
   scale_fill_viridis_d() +
   labs(x = "modeling approach", y = "parameter values", title = "Media 2") +
   theme_bw() +
-  theme(legend.position = "bottom") +
+  theme(legend.position = "bottom",
+        axis.ticks.x = element_blank(),
+        axis.text.x = element_blank()) +
   scale_y_continuous(labels = scales::scientific)
 
 plot_boxplot_both <-
