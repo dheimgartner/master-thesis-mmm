@@ -402,7 +402,7 @@ plot1 <-
          aes(x = modeling, y = value, group = interaction(modeling, decomposition, media), fill = decomposition)) + 
   geom_boxplot(outlier.shape = NA) +
   geom_hline(aes(yintercept = true.param), col = "red", linetype = "dotted") +
-  facet_grid(rows = ggplot2::vars(media, name), cols = ggplot2::vars(modeling), scales = "free") +
+  facet_grid(rows = ggplot2::vars(name), cols = ggplot2::vars(modeling), scales = "free") +
   scale_fill_viridis_d() +
   labs(x = "modeling approach", y = "parameter values", title = "Media 1") +
   theme_bw() +
@@ -418,7 +418,7 @@ plot2 <-
          aes(x = modeling, y = value, group = interaction(modeling, decomposition, media), fill = decomposition)) + 
   geom_boxplot(outlier.shape = NA) +
   geom_hline(aes(yintercept = true.param), col = "red", linetype = "dotted") +
-  facet_grid(rows = ggplot2::vars(media, name), cols = ggplot2::vars(modeling), scales = "free") +
+  facet_grid(rows = ggplot2::vars(name), cols = ggplot2::vars(modeling), scales = "free") +
   scale_fill_viridis_d() +
   labs(x = "modeling approach", y = "parameter values", title = "Media 2") +
   theme_bw() +
