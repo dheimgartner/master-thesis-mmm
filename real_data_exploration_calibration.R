@@ -31,9 +31,9 @@ slice <- dplyr::slice
 # -----------------------------------------------
 
 # Data prep ----
-data.elg <- read_csv2(paste0(getwd(), "/Data/real data/elg.csv"), col_names = T)
-summary.data.elg <- summary(data.elg)
-data.elg$time.index <- 1:nrow(data.elg)
+data.real <- read_csv2(paste0(getwd(), "/Data/real data/data_real.csv"), col_names = T)
+summary.data.real <- summary(data.real)
+data.real$time.index <- 1:nrow(data.real)
 
 # -----------------------------------------------
 
@@ -42,70 +42,70 @@ data.elg$time.index <- 1:nrow(data.elg)
 # decomposes the time series with help of the prophet function.
 
 # Recode YearWeek as Week
-data.elg <- data.elg %>% mutate(Week = substr(YearWeek, 5,6)) %>% select(-YearWeek)
+data.real <- data.real %>% mutate(Week = substr(YearWeek, 5,6)) %>% select(-YearWeek)
 
 # # Seasontrend component for simulation:
 # # We need to standardize 0-1 before decomposition (recall from the simulation_1 script,
 # # that trend patterns have to be on that scale!)
 # # Range function
 # range01 <- function(x) {(x - min(x)) / (max(x) - min(x))}
-# data.elg.n <- range01(data.elg %>% select(-Week)) %>% as_tibble()
-# data.elg.n$Week <- data.elg$Week
-# data.elg.n$Year <- data.elg$Year
+# data.elg.n <- range01(data.real %>% select(-Week)) %>% as_tibble()
+# data.real.n$Week <- data.real$Week
+# data.real.n$Year <- data.real$Year
 # 
-# prophet.elg.n <- SeasonTrendProphet(data.elg.n, "StoreSales", holidays = NULL)
+# prophet.real.n <- SeasonTrendProphet(data.real.n, "StoreSales", holidays = NULL)
 # 
-# prophet.elg.n <- SeasonTrendProphet(data.elg.n, "StoreSales", holidays = NULL)
-# data.elg.n$seasontrend <- prophet.elg.n$trend + prophet.elg.n$yearly
+# prophet.real.n <- SeasonTrendProphet(data.real.n, "StoreSales", holidays = NULL)
+# data.real.n$seasontrend <- prophet.real.n$trend + prophet.real.n$yearly
 # 
-# seasontrend.sim.elg.n <- as.numeric(append(data.elg.n$seasontrend[1:54], data.elg.n$seasontrend))
-# saveRDS(seasontrend.sim.elg.n, paste0(getwd(), "/Data/seasontrend.sim.elg.n.rds"))
+# seasontrend.sim.real.n <- as.numeric(append(data.real.n$seasontrend[1:54], data.real.n$seasontrend))
+# saveRDS(seasontrend.sim.real.n, paste0(getwd(), "/Data/seasontrend.sim.real.n.rds"))
 
-prophet.elg <- SeasonTrendProphet(data.elg, "StoreSales", holidays = NULL)
+prophet.real <- SeasonTrendProphet(data.real, "StoreSales", holidays = NULL)
 
 # Add seasontrend as a column in model data
-data.elg$seasontrend <- prophet.elg$trend + prophet.elg$yearly
+data.real$seasontrend <- prophet.real$trend + prophet.real$yearly
 
 # Remove Week (and WeekNumber)
-data.elg <- data.elg %>% select(-c(Week, WeekNumber))
+data.real <- data.real %>% select(-c(Week, WeekNumber))
 
 # -----------------------------------------------
 
 # Exploration ----
 # Variables and summary stats --
-names(data.elg)
-summary(data.elg)
+names(data.real)
+summary(data.real)
 
 # Correlation matrix befor decay transformation --
 col <- colorRampPalette(c("red", "white", "blue"))(20)
 
-corrplot(cor(data.elg), tl.cex = 0.6, col = col)
-corrplot(cor(data.elg), tl.cex = 0.6, col = col, method = "number")
+corrplot(cor(data.real), tl.cex = 0.6, col = col)
+corrplot(cor(data.real), tl.cex = 0.6, col = col, method = "number")
 
 # VIF values --
-elg.fit <- lm(StoreSales ~. , data = data.elg %>% select(-time.index))
-summary(elg.fit)
-elg.vif <- VIF(elg.fit)
-elg.vif
+real.fit <- lm(StoreSales ~. , data = data.real %>% select(-time.index))
+summary(real.fit)
+real.vif <- VIF(real.fit)
+real.vif
 
 
 # Select media variables of interest ----
-vars.elg <- c("Display", "DM", "DM_Insert", "Facebook", "OOH", "Print", "Search", "TVC", "Youtube")
+vars.real <- c("Display", "DM", "DM_Insert", "Facebook", "OOH", "Print", "Search", "TVC", "Youtube")
 
 # -----------------------------------------------
 
 # Plots ----
 # Sales time-series --
-ggplot(data.elg, aes(x = time.index, y = StoreSales)) + geom_line() +
+ggplot(data.real, aes(x = time.index, y = StoreSales)) + geom_line() +
   geom_line(aes(x = time.index, y = seasontrend), col = "blue") +
   labs(x = "week", y = "sales")
 
 # Spending patterns --
-data.elg.long <- data.elg %>% pivot_longer(cols = vars.elg)
-ggplot(data.elg.long %>% filter(name != "StoreSales"), aes(x = time.index, y = value, col = name)) + geom_line()
+data.real.long <- data.real %>% pivot_longer(cols = vars.real)
+ggplot(data.real.long %>% filter(name != "StoreSales"), aes(x = time.index, y = value, col = name)) + geom_line()
 
 # We might choose these three channels...
-ggplot(data.elg %>% pivot_longer(cols = c(Display, Print)),
+ggplot(data.real %>% pivot_longer(cols = c(Display, Print)),
        aes(x = time.index, y = value, col = name)) + geom_line()
 
 # -----------------------------------------------
