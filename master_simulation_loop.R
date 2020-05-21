@@ -14,7 +14,7 @@
 # ONCE, s.t. the data frame true.contributions is generated. Once this file exists in
 # the Data folder, the observed_data_and_ground_truth script does not need to be rerun.
 
-# Choose either regular, extreme or cardinality
+# Choose either regular or extreme
 true.contribution <- readRDS(paste0(getwd(), "/Data/true.contribution.regular.rds"))
 
 # -----------------------------------------------
